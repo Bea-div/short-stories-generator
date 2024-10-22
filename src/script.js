@@ -16,13 +16,11 @@ function generateStory(event) {
     "You are a story teller and you love telling short and concise stories. Your mission is to generate a story that contains 100 words by following user instructions";
   let apiURL = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
-  axios.get(apiURL).then(displayStory);
+  let storyElement = document.querySelector("#story");
+  storyElement.classList.remove("hidden");
+  storyElement.innerHTML = `Generating Story about ${instructionsInput.value}`;
 
-  new Typewriter("#story", {
-    strings: "Story goes here",
-    autoStart: true,
-    delay: 1,
-  });
+  axios.get(apiURL).then(displayStory);
 }
 
 let storyForm = document.querySelector("#story-generator-form");
